@@ -1,0 +1,1206 @@
+﻿@{
+    var alumno = ViewData["alumno"] as ToqueDeCampana_Practica.Models.TblAlumno;
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.Item;
+    List<SelectListItem> ciudad = (List<SelectListItem>)ViewBag.Ciudad;
+    ViewData["Title"] = "Alumno";
+ 
+    var ruta = "~/img/" + (alumno.VchFoto ?? "perfil.png");
+}
+<style>
+
+    p {
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align:justify;
+    }
+    .image2 {
+        margin-top: 7%;
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 100%;
+        right: 20%;
+    }
+    .foto_perfil {
+        border-radius: inherit;
+        height: inherit;
+        width: inherit;
+        border: 1px solid #666;
+    }
+
+    figure {
+        border-radius: 100%;
+        display: block;
+        height: 250px;
+        position: relative;
+        width: 250px;
+    }
+
+
+
+    figure:after {
+        background-color: rgba(0, 0, 0, .5);
+        border-radius: 5px;
+        color: #fff;
+        content: attr(title);
+        opacity: 0;
+        padding: 6px 12px;
+        position: absolute;
+        left: 110%;
+        top: 30px;
+        transition: all .25s ease;
+        visibility: hidden;
+        white-space: nowrap;
+    }
+
+
+    .image3 {
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 80%;
+        right: 300px;
+        margin-top:5%;
+    }
+    .modal-confirm {
+        color: #434e65;
+        width: 600px;
+    }
+    #iconotexto, #iconotexto1, #iconotexto2, #iconotexto3, #iconotexto4, #iconotexto5, #iconotexto6, #iconotexto7, #iconotexto8, #iconotexto9, #iconotexto10{
+        right: 10px;
+    }
+
+    .form-group {
+        height: 5%;
+        position: static;
+    }
+    .control-label {
+        width: 25%;
+        text-align: start;
+        margin-left:3%;
+    }
+
+    .r {
+        margin-left: 50%;
+        margin-right: 50%;
+    }
+
+    .modal-confirm .modal-content {
+        padding: 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .modal-confirm .modal-header {
+        border-bottom: none;
+        position: relative;
+        text-align: center;
+        margin: -20px -20px 0;
+        border-radius: 5px 5px 0 0;
+        padding: 35px;
+    }
+
+    .modal-confirm h4 {
+        text-align: center;
+        font-size: 36px;
+        margin: 10px 0;
+    }
+
+    .modal-confirm .form-control, .modal-confirm .btn {
+        min-height: 40px;
+        border-radius: 3px;
+    }
+
+    .modal-confirm .close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: #fff;
+        text-shadow: none;
+        opacity: 0.5;
+    }
+
+        .modal-confirm .close:hover {
+            opacity: 0.8;
+        }
+
+    .modal-confirm .icon-box {
+        color: #fff;
+        width: 95px;
+        height: 95px;
+        display: inline-block;
+        border-radius: 50%;
+        z-index: 9;
+        border: 5px solid #fff;
+        padding: 15px;
+        text-align: center;
+    }
+
+        .modal-confirm .icon-box i {
+            font-size: 64px;
+            margin: -4px 0 0 -4px;
+        }
+
+    .modal-confirm.modal-dialog {
+        margin-top: 80px;
+    }
+
+    .modal-confirm .btn, .modal-confirm .btn:active {
+        color: #fff;
+        border-radius: 4px;
+        background: #eeb711 !important;
+        text-decoration: none;
+        transition: all 0.4s;
+        line-height: normal;
+        border-radius: 30px;
+        margin-top: 10px;
+        padding: 6px 20px;
+        border: none;
+    }
+
+        .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+            background: #eda645 !important;
+            outline: none;
+        }
+
+        .modal-confirm .btn span {
+            margin: 1px 3px 0;
+            float: left;
+        }
+
+        .modal-confirm .btn i {
+            margin-left: 1px;
+            font-size: 20px;
+            float: right;
+        }
+
+    .trigger-btn {
+        display: inline-block;
+        margin: 100px auto;
+    }
+
+    .card-header {
+        margin-top:0px;
+        background-color: #1b6ec2;
+        color: white;
+        font-size:25px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .enviar {
+        width: 80%;
+        border-radius: 5%;
+        margin-left: 38%;
+        margin-top: 10px
+    }
+
+    .radio {
+        margin-left: 9%;
+    }
+
+    .radio1 {
+        margin-left: 42%;
+        margin-right: 42%;
+    }
+
+    .line {
+        height: 1px;
+        width: 100%;
+        background-color: #E0E0E0;
+        margin-top: 10px
+    }
+
+    .next {
+        width: 60px
+    }
+</style>
+<form role="form">
+    <div class="card mb-3">
+        <img src="https://album.mediaset.es/eimg/2020/05/05/oyC1BkljrC98J9K2REAoW6.jpg?w=1200" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h3 class="card-title">Toque de <strong>CAMPANA</strong></h3>
+            <h5 class="card-title">Aviso de Privacidad</h5>
+            <p class="card-text"><strong>La Universidad de Monterrey, UDEM, Institución Educativa Privada</strong> con domicilio en Avenida Ignacio Morones Prieto, Número 4500 Poniente, Piso 4, Colonia Jesús M. Garza, Municipio San Pedro Garza García, Nuevo León, Código Postal 66238, México, sitio web: www.udem.edu.mx, correo electrónico datospersonales@udem.edu, teléfono (81) 8215-1000 ext. 2000 y horario de atención de lunes a jueves de 10:00 a 13:00 h; hace de su conocimiento que las finalidades para las cuales realizamos el tratamiento de sus datos personales de identificación y de contacto se relacionan con fines de organización y gestión del evento de graduación para el periodo Primavera 2021. Le informamos que sí realizamos transferencia nacional de sus datos personales a Estafeta Mexicana, S.A. DE C.V., con la finalidad de enviar material y kits de graduación a los estudiantes UDEM, a través de servicios de mensajería y paquetería. Los únicos datos personales transferidos son: nombre completo y domicilio particular. Conozca la versión Integral de este Aviso de Privacidad en nuestro sitio web </p>
+            <p class="card-text"><small class="text-muted">oficial: www.udem.edu.mx/es/conoce/avisos-de-privacidad</small></p>
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Sí, autorizo</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+
+        <h5 class="card-header">Bienvenida</h5>
+        <div class="card-body">
+
+            <h3 class="card-title">¡Hola,<strong> "@alumno.VchNombre @alumno.VchApellidos"</strong>  </h3>
+            <p class="card-text">
+                Nos estamos preparando para crear una experiencia inolvidable previo a la Graduación Académica y Commencement PR’21. Por ello queremos que personalices tu Kit de Graduación con los diferentes artículos que hemos elegido para ti. También te invitamos a vivir la experiencia del Toque de Campana Vox Veritatis de las disertaciones del semestre Primavera 2021. Para que todo esto sea posible,<strong> te solicitamos que nos ayudes confirmando tu información y respondiendo las siguientes preguntas:</strong>
+            </p>
+        </div>
+    </div>
+    <div class="card mb-3">
+        <h5 class="card-header">Datos Generales</h5>
+        <div class="card-body">
+
+            <div class="col-lg-8">
+
+                <div class="form-group row" style="display:none">
+
+                    <input type="text" class="form-control" id="id" name="IdAlumnos" value="@alumno.IdAlumnos" readonly>
+                    <input type="text" class="form-control" id="foto"  value="@alumno.VchFoto" readonly>
+                </div>
+
+                <div class="form-group row">
+                    <label for="nombre" class="control-label">Nombre</label>
+
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="nombre" name="VchNombre" value="@alumno.VchNombre" readonly>
+                        <span class="help-block"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="apellidos" class="control-label">Apellidos</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="apellidos" name="VchApellidos" value="@alumno.VchApellidos" readonly>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="matricula" class="control-label ">Matrícula</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="matricula" name="VchMatricula" value="@alumno.VchMatricula" readonly>
+                        <span class="help-block"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label for="correo" class="control-label">Correo </label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="correo" name="VchCorreo" value="@alumno.VchCorreo" readonly>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    <label for="telefono1" class="control-label">Teléfono 1</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="telefono1" name="VchTel2" value="@alumno.VchTel1">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="telefono2" class="control-label">Teléfono 2</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="telefono2" name="VchTel2" value="@alumno.VchTel2">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                    <label for="universidad" class="control-label">Universidad</label>
+                    <div class="col-md-8">
+                        @Html.DropDownList("IdUniversidad2", items, "Seleciona tu Universidad", new { @class = "form-control" })
+                        <span class="help-block"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label for="carrera" class="control-label">Carrera</label>
+                    <div class="col-md-8">
+                        @Html.DropDownList("IdCarrera2", new List<SelectListItem>(),
+                                  "Selecciona la Carrera", new { @class = "form-control" })
+                        <span class="help-block"></span>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+
+
+                <img src="https://thumbs.dreamstime.com/z/graduaci%C3%B3n-del-estudiante-personaje-de-dibujos-animados-con-el-diploma-117722413.jpg" class="image2">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mb-3">
+
+        <h5 class="card-header">Disertaciones</h5>
+        <div class="card-body">
+            <p class="card-text">
+                Sabemos que el Toque de la Campana Vox Veritatis es un paso muy importante para finalizar tu educación profesional, por lo que hemos trabajado para que puedas vivir esta experiencia en 2 modalidades: presencial o virtual.
+            </p>
+            <h4 class="card-text text-center"><strong>Semestre de disertación</strong></h4>
+            <div class="radio">
+
+                <div class="form-check form-check-inline col-md-4 text-center">
+                    <input class="form-check-input" type="radio" id="VchDisertacion" name="VchDisertacion" onclick="toggle(this)" value="Otoño 2020">
+                    <label class="form-check-label" for="inlineRadio1">Otoño 2020</label>
+                </div>
+                <div class="form-check form-check-inline col-md-4 text-center ">
+                    <input class="form-check-input" type="radio" id="VchDisertacion" name="VchDisertacion" onclick="toggle(this)" value="Primavera 2021">
+                    <label class="form-check-label" for="inlineRadio2">Primavera 2021</label>
+                </div>
+                <div class="form-check form-check-inline col-md-3 text-center">
+                    <input class="form-check-input" type="radio" id="VchDisertacion" name="VchDisertacion" onclick="toggle(this)" value="Otro">
+                    <label class="form-check-label" for="inlineRadio3">Otro</label>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <div class="line"></div>
+
+            </div>
+            <div class="col-md-12" id="otro" style="display:none">
+                <label for="h1" class="form-label">Otro</label>
+                <input type="text" id="VchDisertacion" class="form-control" name="VchDisertacion">
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="card" id="uno" style="display:none">
+
+        <h5 class="card-header">Confirma tu Información</h5>
+        <div class="card-body">
+            <div id="inicio" style="display:none">
+                <p class="card-text ">
+                    Para el envío de tu kit de graduación, por favor ayúdanos confirmando tu dirección actual:
+                    <strong>
+                        Calle: @alumno.VchCalle, Colonia @alumno.VchColonia , No.Interior @alumno.IntNoInterior No.exterior @alumno.IntNoInterior
+                    </strong>
+                    <strong>
+                        *Es importante que estés en ese domicilio del 20 mayo al 18 junio para recibir tu kit.
+                    </strong>
+                </p>
+
+                <br>
+                <div class="row g-3">
+                    <div class="col-md-6 text-right ">
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="primavera" id="Si" onclick="toggle(this)" value="Si">
+                            <label class="form-check-label" for="Si">Si</label>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 ">
+
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input" type="radio" name="primavera" id="No" checked onclick="toggle(this)" value="No">
+                            <label class="form-check-label" for="No">No</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="line"></div>
+
+                    </div>
+                    <br>
+
+                </div>
+            </div>
+
+
+            <div class="" id="primavera" style="display:none">
+
+                <div class="card-body">
+                    <p class="card-text ">
+                        ¿Asistirás al campus a recoger tu kit y toque de campana?
+                    </p>
+
+                    <br>
+
+
+                    <div class="row g-3">
+                        <div class="col-md-6 text-right ">
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="asistencia" id="1" onclick="toggle(this)" value="Presencial">
+                                <label class="form-check-label" for="1">Si</label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 ">
+
+                            <div class="form-check form-check-inline ">
+                                <input class="form-check-input" type="radio" name="asistencia" id="2" onclick="toggle(this)" value="Virtual">
+                                <label class="form-check-label" for="2">No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="line"></div>
+
+                        </div>
+                        <br>
+                    </div>
+
+
+                    <div class="row g-3 " id="presencial" style="display:none">
+
+                        <h3 class="card-title text-center"><strong>Has elegido tu Toque de Campana Vox Veritatis Presencial</strong></h3>
+                        <div class="col-md-12">
+                            <div class="line"></div>
+
+                        </div>
+                        <br>
+
+                        <p class="card-text ">
+                            ¿Cuántos acompañantes irán contigo al toque de campana presencial?
+                        </p>
+
+                        <div class="radio1">
+
+                            <div class="form-check form-check-inline ">
+                                <input class="form-check-input" type="radio" name="hermano" onclick="toggle(this)" value="h0">
+                                <label class="form-check-label" for="">0</label>
+                            </div>
+                            <div class="form-check form-check-inline ">
+                                <input class="form-check-input" type="radio" name="hermano" onclick="toggle(this)" value="h1">
+                                <label class="form-check-label" for="">1</label>
+                            </div>
+                            <div class="form-check form-check-inline ">
+                                <input class="form-check-input" type="radio" name="hermano" onclick="toggle(this)" checked value="h2">
+                                <label class="form-check-label" for="">2</label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="line"></div>
+
+                        </div>
+                        <br>
+                        <br>
+
+                        <div class="form-group row" id="hermano1">
+                            <label for="h1" class="control-label">Nombre del acompañante: </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="h1" name="VchAcompanante1">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row" id="hermano2">
+                            <label for="h2" class="control-label">Nombre del acompañante: </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="h2" name="VchAcompanante2">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row g-3 " id="virtual" style="display:none">
+                        <h3 class="card-title text-center "><strong>Has escogido tu Toque de Campana Vox Veritatis Virtual.</strong></h3>
+                        <div></div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="" id="D_virtual">
+
+                <div class="form-group row">
+                    <label for="calle" class="control-label">Calle: </label>
+
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="calle" name="VchCalle" value="@alumno.VchCalle">
+                        <span class="help-block"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label for="interior" class="control-label">No.Interior</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="interior" name="interior">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="exterior" class="control-label ">No.Exterior:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="exterior" name="IntNoExterior">
+                        <span class="help-block"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label for="colonia" class="control-label">Colonia: </label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="colonia" name="VchColonia">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    <label for="municipio" class="control-label">Municipio:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="municipio" readonly>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group row">
+
+                    <label for="ciudad" class="control-label">Ciudad:</label>
+                    <div class="col-md-8">
+                        @Html.DropDownList("IdResidencia2", ciudad, "Seleciona tu Ciudad", new { @class = "form-control" })
+                        <span class="help-block"></span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row ">
+                    <label for="estado" class="control-label">Estado:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="estado" readonly>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    <label for="cp" class="control-label">CP:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="cp">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    <label for="maps" class="control-label text-primary" id="btn-maps">Google Maps:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="maps" VchMaps>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <br>
+
+    <div class="card mb-3 ">
+        <h5 class="card-header">Personaliza Tu KIT</h5>
+        <div class="card-body">
+            <h5 class="card-title">Kit base + selecciona un artículo de cada categoría*</h5>
+            <div class="card-deck ">
+                <div class="card col-6">
+                    <img class="card-img-top" src="https://ih1.redbubble.net/image.1259187399.9682/ur,socks_flatlay_medium,square,600x600-bg,f8f8f8.1.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Calcetines Entropía</h5>
+
+                        <div class="form-check form-check-inline r">
+                            <input class="form-check-input" type="radio" name="categoria1" id="categoria1" onclick="toggle(this)" value="kit1">
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+
+
+                    </div>
+                </div>
+                <div class="card col-6">
+                    <img class="card-img-top" src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/342eeeb7-6d90-45b8-bfc3-739c74ad9567/calcetines-largos-jordan-everyday-max-3-pares-yATYnOzP.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Calcetines Vox Veritatis</h5>
+
+                        <div class="form-check form-check-inline r">
+                            <input class="form-check-input" type="radio" name="categoria1" id="categoria1" onclick="toggle(this)" value="kit2">
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted"></small>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="card-deck ">
+
+
+                <div class="card col-6">
+                    <img class="card-img-top" src="https://scene7.zumiez.com/is/image/zumiez/image/Nike-NSW-Green-Fleece-Hoodie-_335150.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Hoodie</h5>
+
+                        <div class="form-check form-check-inline  r">
+                            <input class="form-check-input" type="radio" name="categoria2" id="categoria2" onclick="toggle(this)" value="kit3">
+
+                        </div>
+                        <div class="rad text-center" id="rad" style="display:none">
+
+                            <div class="form-check form-check-inline  ">
+                                <input class="form-check-input" type="radio" id="VchTalla" name="VchTalla" onclick="toggle(this)" value="CH">
+                                <label class="form-check-label" for="inlineRadio1">CH</label>
+                            </div>
+                            <div class="form-check form-check-inline ">
+                                <input class="form-check-input" type="radio" id="VchTalla" name="VchTalla" onclick="toggle(this)" value="M">
+                                <label class="form-check-label" for="inlineRadio2">M</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="VchTalla" name="VchTalla" onclick="toggle(this)" value="G">
+                                <label class="form-check-label" for="inlineRadio3">G</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="VchTalla" name="VchTalla" onclick="toggle(this)" value="EG">
+                                <label class="form-check-label" for="inlineRadio3">EG</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted"></small>
+                    </div>
+                </div>
+                <div class="card col-6">
+                    <img class="card-img-top" src="https://cdn.shopify.com/s/files/1/0259/6677/2258/products/TermosYetiBlancoyNegro_700x700.png?v=1604937593" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Termo</h5>
+
+                        <div class="form-check form-check-inline r ">
+                            <input class="form-check-input " type="radio" name="categoria2" id="No" onclick="toggle(this)" value="kit4">
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card mb-3">
+
+        <h5 class="card-header">Personaliza Tu AVATAR</h5>
+        <div class="card-body">
+
+            <h5 class="card-text text-center">¿Ya personalizaste tu avatar?</h5>
+            <div class="row g-3">
+                <div class="col-md-6 text-right ">
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="idvatar" name="avatar" onclick="toggle(this)" value="AvatarSi">
+                        <label class="form-check-label" for="">Si</label>
+                    </div>
+
+                </div>
+                <div class="col-md-6 ">
+
+                    <div class="form-check form-check-inline ">
+                        <input class="form-check-input" type="radio" id="idvatar" name="avatar" onclick="toggle(this)" value="AvatarNo">
+                        <label class="form-check-label" for="">No</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="line"></div>
+
+                </div>
+                <br>
+
+            </div>
+
+            <div class="form-group row " id="avatarimg" style="display:none">
+                <label for="avatar" class="control-label">Avatar</label>
+                <div class="col-md-8">
+                    <input type="file" accept="image/jpeg" class="form-control" id="avatar">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="card mb-3">
+
+        <h5 class="card-header">Fotografía</h5>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+
+
+                    <div class="col-md-4 ">
+                        <div class="d-flex flex-column align-items-center text-center ">
+                            <figure id="photo" title="¿Actualizar Foto?" tooltip-dir="left">
+
+                                <img id="img_click" class="foto_perfil" src="@ruta" asp-append-version="true">
+                            </figure>
+
+
+
+
+
+                                <span class="font-weight-bold mt-1">@alumno.VchNombre</span>
+                                <span class="text-black-50 mt-1">@alumno.VchCorreo</span>
+
+                        </div>
+                        <div class="form-group  " style="display:none">
+            
+                            <input type="file" title="Actualizar foto" accept="image/png, .jpeg, .jpg" class="form-control" id="foto_img" onchange="Carga_img(this)" />
+                        </div>
+                     
+            
+                        <div class=" text-center mt-2" ><button class="btn btn-primary " id="profile-button" type="button" >Cambiar</button></div>
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/71afhuJLh8L._SL1500_.jpg" class="image3">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="d-grid gap-2 enviar">
+
+        <button class="btn btn-success btn-lg" id="btn-enviar" type="button">Enviar Formulario</button>
+
+    </div>
+
+
+</form>
+
+<script src="~/js/validacion.js" asp-append-version="true"></script>
+<script type="text/javascript">
+
+    function toggle(elemento) {
+        if (elemento.value == "Otoño 2020") {
+
+
+            document.getElementById("uno").style.display = "Block";
+            document.getElementById("inicio").style.display = "Block";
+            $("#D_virtual").show();
+            document.getElementById("primavera").style.display = "None";
+            document.getElementById("otro").style.display = "None";
+
+
+        } else {
+            if (elemento.value == "Primavera 2021") {
+
+                document.getElementById("uno").style.display = "Block";
+                document.getElementById("inicio").style.display = "None";
+                document.getElementById("primavera").style.display = "Block";
+                document.getElementById("otro").style.display = "None";
+                $("#D_virtual").show();
+
+
+            } else {
+                if (elemento.value == "Otro") {
+                    $("#D_virtual").show();
+                    document.getElementById("uno").style.display = "Block";
+
+                    document.getElementById("inicio").style.display = "Block";
+                    document.getElementById("primavera").style.display = "None";
+                    $('#No').prop('checked', true);
+                    document.getElementById("otro").style.display = "Block";
+
+
+                }
+
+            }
+        }
+
+
+        if (elemento.value == "Presencial") {
+            document.getElementById("presencial").style.display = "Block";
+            document.getElementById("virtual").style.display = "None";
+
+            $("#D_virtual").show();
+
+
+        } else if (elemento.value == "Virtual") {
+            document.getElementById("presencial").style.display = "None";
+            document.getElementById("virtual").style.display = "Block";
+
+            $("#D_virtual").show();
+
+        }
+        if (elemento.value == "kit3") {
+            document.getElementById("rad").style.display = "Block";
+
+        }
+
+        if (elemento.value == "Si") {
+            $("#D_virtual").hide();
+
+        }
+        if (elemento.value == "No") {
+            $("#D_virtual").show();
+
+        }
+        if (elemento.value == "h0") {
+            $("#hermano1").hide();
+            $("#hermano2").hide();
+
+
+        }
+        if (elemento.value == "h1") {
+            $("#hermano1").show();
+            $("#hermano2").hide();
+
+
+        }
+        if (elemento.value == "h2") {
+            $("#hermano1").show();
+            $("#hermano2").show();
+
+
+        }
+
+        if (elemento.value == "AvatarNo") {
+
+            document.getElementById("avatarimg").style.display = "Block";
+            document.getElementById("fotoimg").style.display = "Block";
+
+        }
+        if (elemento.value == "AvatarSi") {
+
+            document.getElementById("avatarimg").style.display = "None";
+            document.getElementById("fotoimg").style.display = "None";
+
+        }
+    }
+</script>
+
+@section scripts {
+
+    <script>
+
+        $(document).ready(function () {
+
+
+
+            $(document).on("ready", inicio);
+            var id = $("#matricula").val();
+
+        $("#IdUniversidad2").change(function () {
+
+            $.getJSON("/Home/GetCarreraId", { Id: $("#IdUniversidad2").val() }, function (data) {
+
+                $("#IdCarrera2").empty();
+                $("#IdCarrera2").append("<option value> Seleccionar La Carrera de la " + $("#IdUniversidad2 option:selected").text() + " </option>")
+                $.each(JSON.parse(data), function (index, row) {
+
+                    $("#IdCarrera2").append("<option value='" + row.IdCarrera + "'>" + row.VchCarrera + "</option>")
+
+                });
+            });
+        });
+
+
+
+        $("#IdResidencia2").change(function () {
+
+            $.getJSON("/Home/GetResidencia", { Id: $("#IdResidencia2").val() }, function (data) {
+
+                $("#municipio").empty();
+                $("#estado").empty();
+                $("#pais").empty();
+
+
+                $.each(JSON.parse(data), function (index, row) {
+
+                    $("#municipio").val(row.VchMunicipio);
+                    $("#estado").val(row.VchEstado)
+                    $("#pais").val(row.VchPais)
+
+
+                });
+            });
+        });
+    });
+
+
+
+        $('#btn-cerrar').click(function () {
+
+            location.href = "https://localhost:44336/";
+
+        });
+        /*
+
+        $('#btn-ok').click(function () {
+            alert(id);
+
+            location.href = "https://localhost:44336/Home/Alumno?matricula="+id;
+
+        });
+        */
+        $('#profile-button').click(function () {
+            var file = $('#foto_img')[0].files[0];
+
+            if (file != null) {
+                enviar_img();
+            } else {
+                $('#campos_vacios').modal('show');
+            }
+
+        });
+
+        $('#btn-maps').click(function () {
+
+
+            window.open('https://www.google.com.mx/maps/', '_blank');
+
+        });
+
+        $('#img_click').click(function () {
+
+            $('#foto_img').trigger('click');
+            
+
+        });
+        function Carga_img(input) {
+            if (input.files && input.files[0]) {
+
+                var reander = new FileReader();
+
+                reander.onload = function (e) {
+                    $("#img_click").attr("src", e.target.result);
+                };
+                reander.readAsDataURL(input.files[0]);
+            }
+
+        }
+        /*
+        $('#btn-enviar').click(function () {
+            $('#confirmar').modal('show');
+        });*/
+
+        function ValidURL(str) {
+            var regex = /^https?\:\/\/(www\.|maps\.)?google(\.[a-z]+){1,2}\/maps\/?\?([^&]+&)*(ll=-?[0-9]{1,2}\.[0-9]+,-?[0-9]{1,2}\.[0-9]+|q=[^&]+)+($|&)/;
+            if (!regex.test(str)) {
+                alert("Direccion no valido");
+
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function enviar() {
+
+            var disertacion = $('input:radio[name=VchDisertacion]:checked').val();
+            var talla = $('input:radio[name=VchTalla]:checked').val();
+            var tipo = $('input:radio[name=asistencia]:checked').val();
+
+            
+                $.ajax({
+                    type: "POST",
+                    url:"@Url.Action("Post", "Home")",
+                     data: {
+                        IdAlumnos: $("#id").val(),
+                        VchMatricula: $("#matricula").val(),
+                         VchNombre: $("#nombre").val(),
+                         VchApellidos: $("#apellidos").val(),
+                         VchTel1: $("#telefono1").val(),
+                         VchTel2: $("#telefono2").val(),
+                         VchCorreo: $("#correo").val(),
+                         VchDisertacion: disertacion ,
+                         Vchtype: tipo,
+                         VchFoto: $("#foto").val(),
+                         VchAvatar: null,
+                         DtFechaIngreso:null ,
+                         VchCalle: $("#calle").val(),
+                         VchColonia: $("#colonia").val(),
+                         VchCPostal: $("#cp").val(),
+                         IntNoExterior: $("#exterior").val(),
+                         IntNoInterior: $("#interior").val(),
+                         VchMaps: $("#maps").val(),
+                         VchTalla: talla,
+                         VchAcompanante1: $("#h1").val(),
+                         VchAcompanante2: $("#h2").val(),
+                         BtEstatus:1,
+                         IdKit1: null,
+                         IdKit2:null,
+                         IdDisertacion:null,
+                         IdUniversidad2: $("#IdUniversidad2").val(),
+                         IdCarrera2: $("#IdCarrera2").val(),
+                         IdResidencia2: $("#IdResidencia2").val()
+                    },
+
+                    success: function (response) {
+                        if (response!= null) {
+
+                            $('#exito').modal('show');
+                        } else {
+
+
+                        }
+                    }
+                });
+        }
+
+
+        function enviar_img() {
+          
+
+            var file = $('#foto_img')[0].files[0];
+            var matricula = $("#matricula").val();
+            
+            var texto = $("#id").val();
+
+            var formdata = new FormData();
+            formdata.append("id", texto);
+            formdata.append("VchMatricula", matricula);
+            formdata.append("imagename", file);
+            
+            $.ajax({
+                async: true,
+                url: "@Url.Action("img_save", "Home")",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    if (response != null) {
+
+                        $('#img').modal('show');
+
+                    } else {
+
+                    }                   
+                }
+            });
+        }
+
+    </script>
+
+}
+
+<div id="campos_vacios" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center bg-warning">
+                <div class="icon-box">
+
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Advertencia!</h4>
+                <p class="text-center">Verifica no se deben de enviar campos vacios!</p>
+                <button class="btn next btn-success"  data-dismiss="modal"><i class="fas fa-arrow-circle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmar" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center bg-primary">
+                <div class="icon-box">
+
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Confirmación!</h4>
+                <p>¿Estas seguro de enviar este formulario?</p>
+                <button class="btn next btn-success" onclick="enviar()" data-dismiss="modal"><i class="fas fa-arrow-circle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="exito" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center bg-success">
+                <div class="icon-box">
+
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Felicitaciones!</h4>
+                <p class="text-justify"><stro> Muchas gracias, tu información se ha guardado satisfactoriamente en los próximos días recibirás en tu correo electrónico institucional la fecha y horario para tu Toque de Campana Virtual y el envío de tu kit a tu domicilio </p>
+                <p class="text-center"><strong>¡Te esperamos en el Commencement PR21!</strong> </p>
+                <button class="btn next btn-success" id="btn-cerrar" data-dismiss="modal"><i class="fas fa-arrow-circle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="img" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center bg-success">
+                <div class="icon-box">
+
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Excelente!</h4>
+               
+                <p class="text-center"><strong>Tu fotografía se ha actualizado correctamente </strong> </p>
+                <button class="btn next btn-success"  onclick="location.reload()" data-dismiss="modal"><i class="fas fa-arrow-circle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="maps" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title">Hubo un error</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Verifica el direcciòn de Google Maps</p>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-warning" id="btn-cerrar" data-dismiss="modal">Aceptar</button>
+
+            </div>
+        </div>
+    </div>
+</div>

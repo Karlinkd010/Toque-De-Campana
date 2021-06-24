@@ -10,6 +10,16 @@
 
     <link rel="stylesheet" href="~/css/login.css" />
 
+    <style>
+
+        p {
+            font-size: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: justify;
+            
+        }
+    </style>
+
 </head>
 <body>
     <header>
@@ -19,27 +29,30 @@
         <div class="card card0 border-0">
             <div class="row d-flex">
                 <div class="col-lg-6">
-                    <div class="card1 pb-5">
+                    <div class="card1 pb-2">
                         <div class="row"> <img src="~/img/logo.png" class="logo"> </div>
-                        <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="~/img/img.png" class="image"> </div>
+                        <div class="row px-2 justify-content-center border-line"> <img src="https://static8.depositphotos.com/1441191/1047/i/950/depositphotos_10475219-stock-photo-mortar-board-with-degree.jpg" class="image"> </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <form action="/Home/Login" >
+                    <form action="Login">
                         <div class="card2 card border-0 px-4 py-5">
                             <div class="row mb-4 px-3 ">
-                                <h3> Iniciar Sesión</h3>
+                                <h3> Estimado alumno</h3>
+                            </div>
+                            <div class="text-center">
+                                <p class="p">
+                                    Su formulario se ha enviado correctamente al sistema , espere instrucciones en su correo electrónico istitucional
+                                </p>
+                                <p class="p">
+                                    <strong>Gracias!! </strong>
+</p>
                             </div>
 
 
-                            <div>
-                                @{ if (!String.IsNullOrEmpty(ViewBag.Menssaje))
-                                    {
-                        <div class="alert alert-danger text-center  ">¡ @(ViewBag.Menssaje)!</div> } }
 
-                            </div>
-                            <div class="row mb-3 px-3">
-                                <button type="submit" class="btn btn-blue text-center">Acceder</button>
+                            <div class="row mb-3 px-3 mt-5">
+                                <button type="submit" class="btn btn-blue text-center"> Aceptar</button>
                             </div>
 
                         </div>
@@ -50,8 +63,8 @@
             </div>
             <div class="bg-blue py-4">
                 <div class="row px-3">
-                    <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2019. All rights reserved.</small>
-                    <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
+                    <small class="ml-4 ml-sm-5 mb-2"> Copyright &copy; 2019. All rights reserved.</small>
+                    <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"> </span> <span class="fa fa-google-plus mr-4 text-sm"> </span> <span class="fa fa-linkedin mr-4 text-sm"> </span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"> </span> </div>
                 </div>
             </div>
         </div>

@@ -45,13 +45,21 @@ namespace ToqueDeCampana.Controllers
               var user=  _context.TblAlumnos.FirstOrDefault(e => e.VchCorreo == email && e.VchMatricula == clave);
                 
 
-                if (user!=null)
+                if (user!=null && user.Vchtype ==null && user.VchDisertacion ==null)
                 {
 
                     return RedirectToAction("Alumno", "Home", new { matricula = user.VchMatricula });
 
-                   // return (ActionResult)Login(newuser.VchNombre);
                 }
+                else if (user != null && user.Vchtype!=null && user.VchDisertacion !=null)
+                {
+                   // return (ActionResult)Mensaje("Su formulario se ha enviado Correctamente");
+                    return RedirectToAction("Mensaje", "Home");
+
+
+                }
+
+
                 else
                 {
                     return (ActionResult)Login("Lo sentimos!!, No estas Registrado en el sistema");
@@ -78,7 +86,6 @@ namespace ToqueDeCampana.Controllers
             ViewBag.Menssaje = menssaje;
             return View();
         }
-
 
         public IActionResult Privacy()
         {
@@ -245,21 +252,6 @@ namespace ToqueDeCampana.Controllers
 
             return RedirectToAction("Alumno", "Home", new { matricula = alumno.VchMatricula });
         }
-
-        [HttpPost]
-        public IActionResult Mensaje(TblAlumno alumno)
-        {
-            
-
-            _context.TblAlumnos.Update(alumno);
-            _context.SaveChanges();
-
-            return (ActionResult)Mensaje("Muchas gracias, tu información se ha guardado satisfactoriamente en los próximos días recibirás en tu correo electrónico institucional la fecha y horario para tu Toque de Campana Virtual y el envío de tu kit a tu domicilio ¡Te esperamos en el Commencement PR21! ");
-
-
-        }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

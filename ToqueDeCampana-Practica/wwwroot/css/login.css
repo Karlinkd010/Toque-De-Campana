@@ -30,11 +30,16 @@ input, textarea {
     margin-top: 20px;
     margin-left: 35px
 }
+.p{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size:16px;
+}
 
 .image {
     width: 460px;
     height: 380px
 }
+
 
 .border-line {
     border-right: 1px solid #EEEEEE
